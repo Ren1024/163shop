@@ -12,46 +12,38 @@
 		
 		<!-- 导航区域 -->
 		<scroll-view scroll-x="true" class="navScroll" enable-flex>
-			<view class="navItem active">
+			<view class="navItem" :class="{active : navIndex === -1}" @click="changeIndex(-1)">
 				推荐
 			</view>
-			<view class="navItem">
-				居家生活
-			</view>
-			<view class="navItem">
-				推荐
-			</view>
-			<view class="navItem">
-				居家生活
-			</view>
-			<view class="navItem">
-				推荐
-			</view>
-			<view class="navItem">
-				居家生活
-			</view>
-			<view class="navItem">
-				推荐
-			</view>
-			<view class="navItem">
-				居家生活
-			</view>
-			<view class="navItem">
-				推荐
-			</view>
-			<view class="navItem">
-				居家生活
+			<view class="navItem" :class="{active : navIndex === index}" v-for="(item, index) in indexData.kingKongModule.kingKongList" v-key="item.L1Id" @click="changeIndex(index)">
+				{{item.text}}
 			</view>
 		</scroll-view>
 	</view>
 </template>
 
 <script>
+	import request from '../../utils/request.js'
 	export default {
 		data() {
 			return {
-				
-			};
+				indexData:{},
+				navIndex: -1,
+			}
+		},
+		
+		mounted(){
+			this.getIndexData()
+		},
+		methods:{
+			async getIndexData(){
+				const result = await request('/getIndexData')
+				// console.log(result);
+				this.indexData = result
+			},
+			changeIndex(navIndex){
+				this.navIndex = navIndex
+			}
 		}
 	}
 </script>
