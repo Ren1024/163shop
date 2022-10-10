@@ -11,11 +11,18 @@
 		</view>
 		
 		<!-- 导航区域 -->
-		<scroll-view scroll-x="true" class="navScroll" enable-flex>
+		<scroll-view scroll-x="true" class="navScroll" enable-flex v-if="indexData.kingKongModule">
 			<view class="navItem" :class="{active : navIndex === -1}" @click="changeIndex(-1)">
 				推荐
 			</view>
-			<view class="navItem" :class="{active : navIndex === index}" v-for="(item, index) in indexData.kingKongModule.kingKongList" v-key="item.L1Id" @click="changeIndex(index)">
+			<view 
+				class="navItem" 
+				:class="{active : navIndex === index}" 
+				v-for="(item, index) in indexData.kingKongModule.kingKongList" 
+				
+				v-bind:key="item.L1Id"
+				@click="changeIndex(index)"
+			>
 				{{item.text}}
 			</view>
 		</scroll-view>
@@ -24,10 +31,12 @@
 
 <script>
 	import request from '../../utils/request.js'
+	import { mapState, mapActions } from 'vuex'
+	
+	
 	export default {
 		data() {
 			return {
-				indexData:{},
 				navIndex: -1,
 			}
 		},
@@ -36,14 +45,17 @@
 			this.getIndexData()
 		},
 		methods:{
-			async getIndexData(){
-				const result = await request('/getIndexData')
-				// console.log(result);
-				this.indexData = result
-			},
+			...mapActions({
+				getIndexData:'getIndexData'
+			}),
 			changeIndex(navIndex){
 				this.navIndex = navIndex
 			}
+		},
+		computed:{
+			...mapState({
+				indexData: state => state.home.indexData
+			})
 		}
 	}
 </script>
@@ -94,10 +106,11 @@
 	
 	
 	.navScroll
-		display: flex
+		// display: flex
 		white-space: nowrap
 		.navItem
-			flex-shrink: 0
+			display: inline-block
+			// flex-shrink: 0
 			width: 170rpx
 			height: 80rpx
 			line-height: 80rpx
