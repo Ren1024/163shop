@@ -26,15 +26,24 @@
 				{{item.text}}
 			</view>
 		</scroll-view>
+		
+		<!-- 内容区 -->
+		<scroll-view scroll-y="true" >
+			<Recommend></Recommend>
+		</scroll-view>
+		
 	</view>
 </template>
 
 <script>
 	import request from '../../utils/request.js'
 	import { mapState, mapActions } from 'vuex'
-	
+	import Recommend from '../../components/recommend/recommend.vue'
 	
 	export default {
+		components:{
+			Recommend
+		},
 		data() {
 			return {
 				navIndex: -1,

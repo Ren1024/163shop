@@ -13,8 +13,8 @@ const mutations = {
 }
 
 const actions = {
-	// 发送请求获取数据
 	async getIndexData({commit}){
+		// 发送请求获取数据
 		const result = await request('/getIndexData')
 		// 调用mutations修改数据
 		commit('updateIndexData',result)
