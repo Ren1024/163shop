@@ -10,53 +10,8 @@
 			<!-- 左边 -->
 			<view class="leftContainer">
 				<scroll-view scroll-y="true" class="navScroll">
-					<view class="navItem">
-						居家生活
-					</view>
-					<view class="navItem">
-						居家生活
-					</view>
-					<view class="navItem">
-						居家生活
-					</view>
-					<view class="navItem">
-						居家生活
-					</view>
-					<view class="navItem">
-						居家生活
-					</view>
-					<view class="navItem">
-						居家生活
-					</view>
-					<view class="navItem">
-						居家生活
-					</view>
-					<view class="navItem">
-						居家生活
-					</view>
-					<view class="navItem">
-						居家生活
-					</view>
-					<view class="navItem">
-						居家生活
-					</view>
-					<view class="navItem">
-						居家生活
-					</view>
-					<view class="navItem">
-						居家生活
-					</view>
-					<view class="navItem">
-						居家生活
-					</view>
-					<view class="navItem">
-						居家生活
-					</view>
-					<view class="navItem">
-						居家生活
-					</view>
-					<view class="navItem">
-						居家生活
+					<view class="navItem" :class="{active : categoryIndex === index}" @click="changeIndex(index)" v-for="(item, index) in categoryList" :key="item.id">
+						{{item.name}}
 					</view>
 				</scroll-view>
 			</view>
@@ -67,12 +22,26 @@
 </template>
 
 <script>
+	import request from '../../utils/request.js'
 	export default {
 		data() {
 			return {
-				
+				categoryList:[],
+				categoryIndex: 0,
 			};
+		},
+		mounted(){
+			this.getCategoryData()
+		},
+		methods:{
+			async getCategoryData(){
+				this.categoryList = await request('/getCategoryData')
+			},
+			changeIndex(navIndex){
+				this.categoryIndex = navIndex
+			}
 		}
+		
 	}
 </script>
 
@@ -89,8 +58,9 @@
 				margin 0 auto
 		.contentContainer
 			display flex
-			height 500rpx
+			height calc(100vh - 80rpx)
 			border-top 1rpx solid #333
+			box-sizing border-box
 			.leftContainer
 				width 20%
 				// height 500rpx
@@ -100,10 +70,19 @@
 				.navScroll
 					height calc(100vh - 82rpx)
 					.navItem
+						position relative
 						height 80rpx
 						line-height 80rpx
 						text-align center
 						font-size 26rpx
+						&.active:before
+							position absolute
+							top 10rpx
+							left 6rpx
+							content ''
+							width 4rpx
+							height 60rpx
+							background #dd1a21
 			.rightContainer
 				width 80%
 				// height 500rpx
