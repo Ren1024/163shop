@@ -16,7 +16,19 @@
 				</scroll-view>
 			</view>
 			<!-- 右边 -->
-			<view class="rightContainer"></view>
+			<view class="rightContainer">
+				<scroll-view scroll-y="true" class="shopScroll">
+					<view class="shopHeader">
+						<img class="banner" :src="categoryObj.imgUrl" alt="">
+					</view>
+					<view class="shopList">
+						<view class="shopItem" v-for="item in categoryObj.subCateList" v-bind:key="item.id">
+							<img class="shopImg" :src="item.wapBannerUrl" alt="">
+							<text class="shopName">{{item.name}}</text>
+						</view>
+					</view>
+				</scroll-view>
+			</view>
 		</view>
 	</view>
 </template>
@@ -39,6 +51,11 @@
 			},
 			changeIndex(navIndex){
 				this.categoryIndex = navIndex
+			}
+		},
+		computed:{
+			categoryObj: function(){
+				return this.categoryList[this.categoryIndex]
 			}
 		}
 		
@@ -85,7 +102,30 @@
 							background #dd1a21
 			.rightContainer
 				width 80%
-				// height 500rpx
-				background #eee
+				// background #eee
+				.shopScroll
+					height calc(100vh - 82rpx)
+					.shopHeader
+						.banner
+							width 528rpx
+							height 192rpx
+							display block
+							margin: 20rpx auto
+					.shopList
+						display flex
+						flex-wrap wrap
+						.shopItem
+							width 33.333%
+							text-align center
+							display flex
+							flex-direction column
+							// justify-content center
+							align-items center
+							.shopImg
+								width 144rpx
+								height 144rpx
+								// width 90%
+							.shopName
+								font-size 26rpx
 				
 </style>

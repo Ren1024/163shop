@@ -12,7 +12,7 @@
 		
 		<!-- 导航区域 -->
 		<scroll-view scroll-x="true" class="navScroll" enable-flex v-if="indexData.kingKongModule">
-			<view class="navItem" :class="{active : navIndex === -1}" @click="changeIndex(-1)">
+			<view class="navItem" :class="{active : navIndex === -1}" @click="changeIndex(-1, 0)">
 				推荐
 			</view>
 			<view 
@@ -21,7 +21,7 @@
 				v-for="(item, index) in indexData.kingKongModule.kingKongList" 
 				
 				v-bind:key="item.L1Id"
-				@click="changeIndex(index)"
+				@click="changeIndex(index, item.L1Id)"
 			>
 				{{item.text}}
 			</view>
@@ -29,7 +29,8 @@
 		
 		<!-- 内容区 -->
 		<scroll-view scroll-y="true" >
-			<Recommend></Recommend>
+			<Recommend v-if="!!!navId"></Recommend>
+			<CateList v-else :navId="navId"></CateList>
 		</scroll-view>
 		
 	</view>
@@ -39,14 +40,17 @@
 	import request from '../../utils/request.js'
 	import { mapState, mapActions } from 'vuex'
 	import Recommend from '../../components/recommend/recommend.vue'
+	import CateList from '../../components/cateList/cateList.vue'
 	
 	export default {
 		components:{
-			Recommend
+			Recommend,
+			CateList
 		},
 		data() {
 			return {
 				navIndex: -1,
+				navId: 1,
 			}
 		},
 		
@@ -57,8 +61,9 @@
 			...mapActions({
 				getIndexData:'getIndexData'
 			}),
-			changeIndex(navIndex){
+			changeIndex(navIndex, navId){
 				this.navIndex = navIndex
+				this.navId = navId
 			}
 		},
 		computed:{

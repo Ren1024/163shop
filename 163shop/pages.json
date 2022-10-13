@@ -8,6 +8,22 @@
     "uniIdRouter" : {},
     "pages" : [
 				{
+				    "path" : "pages/personal/personal",
+				    "style" :                                                                                    
+				    {
+				        "navigationBarTitleText": "个人中心",
+				        "enablePullDownRefresh": false
+				    }
+				    
+				},
+        {
+            "path" : "pages/index/index",
+            "style" : {
+                "navigationBarTitleText" : "首页",
+                "enablePullDownRefresh" : false
+            }
+        },
+				{
             "path" : "pages/category/category",
             "style" :                                                                                    
             {
@@ -15,13 +31,6 @@
                 "enablePullDownRefresh": false
             }
             
-        },
-        {
-            "path" : "pages/index/index",
-            "style" : {
-                "navigationBarTitleText" : "首页",
-                "enablePullDownRefresh" : false
-            }
         },
 				{
             "path" : "pages/car/car",
@@ -33,10 +42,10 @@
             
         },
 				{
-            "path" : "pages/personal/personal",
+            "path" : "pages/login/login",
             "style" :                                                                                    
             {
-                "navigationBarTitleText": "个人中心",
+                "navigationBarTitleText": "登录",
                 "enablePullDownRefresh": false
             }
             
