@@ -23,7 +23,7 @@
 		methods: {
 			handleGetUserInfo(){
 				// console.log(res);
-				/* wx.getUserProfile({
+				wx.getUserProfile({
 					desc:'完善会员信息',
 					success: (res) => {
 						// console.log(res);
@@ -40,20 +40,25 @@
 					fail: (err) => {
 						console.log(err);
 					}
+				})
+				
+				/* wx.getSetting({
+				  success(res) {
+				    if (!res.authSetting['scope.record']) {
+				      wx.authorize({
+				        scope: 'scope.record',
+				        success () {
+				          // 用户已经同意小程序使用录音功能，后续调用 wx.startRecord 接口不会弹窗询问
+				          wx.startRecord()
+				        }
+				      })
+				    }
+				  }
 				}) */
 				
-				uni.authorize({
-					scope:'scope.userInfo',
-					success: (res) => {
-						console.log(res);
-						uni.getUserInfo({
-							
-						})
-					},
-					fail: (err) => {
-						console.log(err);
-					}
-				})
+				
+				
+				
 			}
 		}
 	}

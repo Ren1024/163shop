@@ -8,6 +8,15 @@
     "uniIdRouter" : {},
     "pages" : [
 				{
+				    "path" : "pages/cart/cart",
+				    "style" :                                                                                    
+				    {
+				        "navigationBarTitleText": "购物车",
+				        "enablePullDownRefresh": false
+				    }
+				    
+				},
+				{
 				    "path" : "pages/personal/personal",
 				    "style" :                                                                                    
 				    {
@@ -33,19 +42,19 @@
             
         },
 				{
-            "path" : "pages/car/car",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "购物车",
-                "enablePullDownRefresh": false
-            }
-            
-        },
-				{
             "path" : "pages/login/login",
             "style" :                                                                                    
             {
                 "navigationBarTitleText": "登录",
+                "enablePullDownRefresh": false
+            }
+            
+        }
+        ,{
+            "path" : "pages/detail/detail",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "商品详情页",
                 "enablePullDownRefresh": false
             }
             
@@ -70,7 +79,7 @@
 					"text": "分类"
 				}, 
 				{
-					"pagePath": "pages/car/car",
+					"pagePath": "pages/cart/cart",
 					"iconPath": "static/images/tabBar/tab-cart.png",
 					"selectedIconPath": "static/images/tabBar/tab-cart-current.png",
 					"text": "购物车"

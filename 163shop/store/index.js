@@ -3,6 +3,7 @@ import vue from 'vue'
 import vuex from 'vuex'
 
 import home from './modules/home.js'
+import cart from './modules/cart.js'
 
 // 声明使用
 vue.use(vuex)
@@ -11,7 +12,8 @@ vue.use(vuex)
 
 const store = new vuex.Store({
 	modules: {
-		home
+		home,
+		cart
 	}
 })
 

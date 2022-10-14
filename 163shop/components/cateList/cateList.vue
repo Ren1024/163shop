@@ -13,7 +13,7 @@
 		
 		<!-- 商品列表区 -->
 		<view class="shopList">
-			<view class="shopItem" v-for="shopItem in cateObj.itemList" v-bind:key="shopItem.id">
+			<view class="shopItem" v-for="shopItem in cateObj.itemList" v-bind:key="shopItem.id" @click="toDetail(shopItem)">
 				<img class="shopImg" :src="shopItem.listPicUrl" alt="">
 				<view class="shopName common">{{shopItem.name}}</view>
 				<view class="shopPrice common">￥{{shopItem.retailPrice}}</view>
@@ -38,6 +38,11 @@
 		methods:{
 			async getIndexCateList(){
 				this.indexCateList = await request('/getIndexCateList')
+			},
+			toDetail(shopItem){
+				wx.navigateTo({
+					url:'/pages/detail/detail?shopItem=' + JSON.stringify(shopItem)
+				})
 			}
 		},
 		computed:{

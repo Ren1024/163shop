@@ -1,9 +1,10 @@
 <template>
 	<div>
 		<div class="header">
-			<image class="userImg" src="../../static/images/personal/personal.png" mode=""></image>
+			<image class="userImg" :src="userInfo.nickName ? userInfo.avatarUrl : '../../static/images/personal/personal.png'" mode=""></image>
+			<!-- <image class="userImg" src="../../static/images/personal/personal.png" mode=""></image> -->
 			<div class='userInfo' @click='toLogin'>
-				<p>未登录</p>
+				<p>{{userInfo.nickName ? userInfo.nickName : '未登录'}}</p>
 			</div>
 		</div>
 		
@@ -44,6 +45,7 @@
 </template>
 
 <script>
+	
 	module.exports = {
 		data(){
 			return {
@@ -95,7 +97,16 @@
 			}
 		},
 		mounted(){
-			
+			wx.getStorage({
+				key:'userInfo',
+				success: (res) => {
+					// console.log('success', res);
+					this.userInfo = res.data
+				},
+				fail: (err) => {
+					console.log('fail',err);
+				}
+			})
 		},
 		methods: {
 			toLogin(){
