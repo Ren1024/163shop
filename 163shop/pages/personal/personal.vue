@@ -45,6 +45,7 @@
 </template>
 
 <script>
+	import request from '../../utils/request.js'
 	
 	module.exports = {
 		data(){
@@ -97,6 +98,7 @@
 			}
 		},
 		mounted(){
+			// 获取用户基本信息
 			wx.getStorage({
 				key:'userInfo',
 				success: (res) => {
@@ -105,6 +107,19 @@
 				},
 				fail: (err) => {
 					console.log('fail',err);
+				}
+			})
+			
+			// 获取用户code
+			wx.login({
+				success: async (res) => {
+					console.log(res);
+					let code = res.code
+					// 携带code发请求
+					const result = await request('/getOpenId',{code})
+					// console.log(result);
+					// 储存token
+					wx.setStorageSync('token',result)
 				}
 			})
 		},
